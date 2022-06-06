@@ -1,0 +1,100 @@
+{% extends "home.html" %}
+
+{% block body %}
+<table class="layui-table" style="width:90%; margin-left:auto; margin-right:auto;">
+    <colgroup>
+        <col width="200">
+        <col width="200">
+        <col>
+    </colgroup>
+    <thead>
+        <tr>
+            <th>Mail Alert</th>
+            <th>SSL Port</th>
+            <th>Mail Host</th>
+            <th>Mail User</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>{{ send_mail }}</td>
+            <td>{{ ssl_port }}</td>
+            <td>{{ mail_host }}</td>
+            <td>{{ mail_user }}</td>
+        </tr>
+    </tbody>
+</table>
+<br>
+<form class="layui-form" action="/home/" lay-filter="example" method="get">
+    <div class="layui-form-item" align="center">
+        <div>
+            <input type="text" name="mail_host" lay-verify="title" autocomplete="off" placeholder="Mail host"
+                class="layui-input" style="width:50%">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-btn-container" align="center">
+            <button type="submit" class="layui-btn" lay-submit="" lay-filter="demo1" name="set_mail_host"
+                value="True">Set mail host</button>
+        </div>
+    </div>
+    <br>
+    <div class="layui-form-item" align="center">
+        <div>
+            <input type="text" name="mail_user" lay-verify="title" autocomplete="off" placeholder="Mail user"
+                class="layui-input" style="width:50%">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-btn-container" align="center">
+            <button type="submit" class="layui-btn" lay-submit="" lay-filter="demo1" name="set_mail_user"
+                value="True">Set mail user</button>
+        </div>
+    </div>
+    <br>
+    <div class="layui-form-item" align="center">
+        <div>
+            <input type="password" name="mail_password" placeholder="Mail password" autocomplete="off" class="layui-input"
+                style="width:50%">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-btn-container" align="center">
+            <button type="submit" class="layui-btn" lay-submit="" lay-filter="demo1" name="set_mail_password"
+                value="True">Set mail password</button>
+        </div>
+    </div>
+    <br>
+    <div class="layui-form-item" align="center">
+        <div>
+            <input type="text" name="ssl_port" lay-verify="title" autocomplete="off" placeholder="SSL port"
+                class="layui-input" style="width:50%">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-btn-container" align="center">
+            <button type="submit" class="layui-btn" lay-submit="" lay-filter="demo1" name="set_ssl_port" value="True">Set
+                SSL port</button>
+        </div>
+    </div>
+    <br>
+    <div class="layui-form-item" align="center">
+        <input type="checkbox" name="mail_alert" lay-skin="switch" {% if send_mail == True %} checked="" {% endif %}
+            lay-text="Turn mail alert off|Turn mail aleret on">
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-btn-container" align="center">
+            <button type="submit" class="layui-btn layui-btn-normal" lay-submit="" lay-filter="demo1" name="set_mail_alert_state"
+                value="True">Set mail alert state</button>
+        </div>
+    </div>
+</form>
+<br>
+{% if result != "" %}
+<div align="center" id="anchor">
+    <blockquote class="layui-elem-quote layui-text" style="width:60%">
+        {{ result }}
+    </blockquote>
+</div>
+{% endif %}
+{% endblock %}

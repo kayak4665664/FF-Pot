@@ -1,0 +1,59 @@
+{% extends "home.html" %}
+
+{% block body %}
+<script>
+    layui.use('code', function () {
+        layui.code({
+            height: '450px'
+        });
+    });
+</script>
+<div align="center">
+    <pre class="layui-code" style="width:90%" align="left">
+{{ out_text }}</pre>
+</div>
+<br>
+<form class="layui-form" action="/home/" lay-filter="example" method="get">
+    <div class="layui-hide" align="center">
+        <div>
+            <input type="checkbox" name="telnet" title="Telnet" {% if telnet == "on" %} checked="" {% endif %}>
+            <input type="checkbox" name="ssh" title="SSH" {% if ssh == "on" %} checked="" {% endif %}>
+        </div>
+    </div>
+    <div class="layui-hide" align="center">
+        <div class="layui-inline">
+            <div class="layui-inline" id="date_picker">
+                {% if start_date != "" and start_date is not None and end_date != "" and end_date is not None %}
+                <div class="layui-input-inline">
+                    <input type="text" name="start_date" id="start_date" class="layui-input" placeholder="From"
+                        value="{{ start_date }}" autocomplete="on">
+                </div>
+                <div class="layui-form-mid">-></div>
+                <div class="layui-input-inline">
+                    <input type="text" name="end_date" id="end_date" class="layui-input" placeholder="To"
+                        value="{{ end_date }}" autocomplete="on">
+                </div>
+                {% else %}
+                <div class="layui-input-inline">
+                    <input type="text" name="start_date" id="start_date" class="layui-input" placeholder="From"
+                        autocomplete="off">
+                </div>
+                <div class="layui-form-mid">-></div>
+                <div class="layui-input-inline">
+                    <input type="text" name="end_date" id="end_date" class="layui-input" placeholder="To"
+                        autocomplete="off">
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-btn-container" align="center">
+            <button type="submit" class="layui-btn" lay-submit="" lay-filter="demo1" name="back_to_connections_log"
+                value="{{ id }}">Back</button>
+            <button type="submit" class="layui-btn layui-btn-normal" lay-submit="" lay-filter="demo1"
+                name="download_connection_log" value="{{ id }}">Download</button>
+        </div>
+    </div>
+</form>
+{% endblock %}

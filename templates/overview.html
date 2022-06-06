@@ -1,0 +1,42 @@
+{% extends "home.html" %}
+
+{% block body %}
+<div align="center">
+    <blockquote class="layui-elem-quote layui-text" style="width:60%">
+        Telnet Honetpot:
+        {% if overview.state_of_telnet == True %}
+        <span class="layui-badge layui-bg-green">running</span>
+        {% else %}
+        <span class="layui-badge">stopped</span>
+        {% endif %}
+        &emsp;&emsp;SSH Honetpot:
+        {% if overview.state_of_ssh == True %}
+        <span class="layui-badge layui-bg-green">running</span>
+        {% else %}
+        <span class="layui-badge">stopped</span>
+        {% endif %}
+        <br><br><br><br>
+        Total Connections:
+        <span class="layui-badge layui-bg-black">{{ overview.total_connections }}</span>
+        &emsp;&emsp;Telnet Connections:
+        <span class="layui-badge layui-bg-black">{{ overview.telnet_connections }}</span>
+        &emsp;&emsp;SSH Connecionts:
+        <span class="layui-badge layui-bg-black">{{ overview.ssh_connections }}</span>
+        <br><br>
+        1 Hour:
+        <span class="layui-badge layui-bg-black">{{ overview.connections_in_1_hour }}</span>
+        &emsp;&emsp;1 Day:
+        <span class="layui-badge layui-bg-black">{{ overview.connections_in_1_day }}</span>
+        &emsp;&emsp;1 Month:
+        <span class="layui-badge layui-bg-black">{{ overview.connections_in_1_month }}</span>
+        <br><br><br><br>
+        Most Connected:<br>
+        {% for connection in overview.most_connected %}
+        <span class="layui-badge layui-bg-blue">{{ connection }}</span><br>
+        {% endfor %}
+        <br><br><br>
+        Number of Logs:
+        <span class="layui-badge layui-bg-black">{{ overview.number_of_logs }}</span>
+    </blockquote>
+</div>
+{% endblock %}

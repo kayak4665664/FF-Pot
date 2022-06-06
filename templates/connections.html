@@ -1,0 +1,53 @@
+{% extends "home.html" %}
+
+{% block body %}
+<form class="layui-form" action="/home/" lay-filter="example" method="get">
+    <div class="layui-form-item" align="center">
+        <div>
+            <input type="checkbox" name="telnet" title="Telnet" {% if telnet == "on" %}checked=""{% endif %}>
+            <input type="checkbox" name="ssh" title="SSH" {% if ssh == "on" %}checked=""{% endif %}>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-btn-container" align="center">
+            <button type="submit" class="layui-btn" lay-submit="" lay-filter="demo1" name="filter_connections"
+                value="True">Filter</button>
+        </div>
+    </div>
+</form>
+<br>
+{% if count > 0 %}
+<table class="layui-table" lay-even="" lay-skin="nob" style="width:90%; margin-left:auto; margin-right:auto;">
+    <colgroup>
+        <col>
+        <col>
+        <col>
+        <col>
+    </colgroup>
+    <thead>
+        <tr>
+            <th>IP</th>
+            <th>Type</th>
+            <th>Country</th>
+            <th>City</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for connection in connections %}
+        <tr>
+            <td>{{ connection.ip }}</td>
+            <td>{{ connection.honeypot_type }}</td>
+            <td>{{ connection.country }}</td>
+            <td>{{ connection.city }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<div align="center">
+    <blockquote class="layui-elem-quote layui-text" style="width:60%">
+        No connection.
+    </blockquote>
+</div>
+{% endif %}
+{% endblock %}

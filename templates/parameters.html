@@ -1,0 +1,109 @@
+{% extends "home.html" %}
+
+{% block body %}
+<table class="layui-table" style="width:90%; margin-left:auto; margin-right:auto;">
+    <colgroup>
+        <col width="200">
+        <col width="200">
+        <col>
+        <col>
+    </colgroup>
+    <thead>
+        <tr>
+            <th>Telnet Honetpot Port</th>
+            <th>SSH Honetpot Port</th>
+            <th>Root</th>
+            <th>Default Directory</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>{{ telnet_honeypot_port }}</td>
+            <td>{{ ssh_honeypot_port }}</td>
+            <td>{{ root }}</td>
+            <td>{{ default_directory }}</td>
+        </tr>
+    </tbody>
+</table>
+<br>
+<form class="layui-form" action="/home/" lay-filter="example" method="get">
+    <div class="layui-form-item" align="center">
+        <div>
+            <input type="text" name="telnet_honeypot_port" lay-verify="title" autocomplete="off"
+                placeholder="Telnet honetpot port, e.g. 23" class="layui-input" style="width:50%">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-btn-container" align="center">
+            <button type="submit" class="layui-btn" lay-submit="" lay-filter="demo1" name="set_telnet_honetpot_port"
+                value="True">Set Telnet honeypot port</button>
+        </div>
+    </div>
+    <br>
+    <div class="layui-form-item" align="center">
+        <div>
+            <input type="text" name="ssh_honeypot_port" lay-verify="title" autocomplete="off"
+                placeholder="SSH honetpot port, e.g. 22" class="layui-input" style="width:50%">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-btn-container" align="center">
+            <button type="submit" class="layui-btn" lay-submit="" lay-filter="demo1" name="set_ssh_honetpot_port"
+                value="True">Set SSH honeypot port</button>
+        </div>
+    </div>
+    <br>
+    <div class="layui-form-item" align="center">
+        <div>
+            <input type="text" name="root" lay-verify="title" autocomplete="off" placeholder="Root directory, e.g. /"
+                class="layui-input" style="width:50%">
+        </div>
+    </div>
+    <div class="layui-form-item" align="center">
+        <div>
+            <input type="text" name="default_directory" lay-verify="title" autocomplete="off"
+                placeholder="Default directory, e.g. /home/ubuntu/" class="layui-input" style="width:50%">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-btn-container" align="center">
+            <button type="submit" class="layui-btn" lay-submit="" lay-filter="demo1" name="set_directory"
+                value="True">Set directory</button>
+        </div>
+    </div>
+    <br>
+    <div class="layui-form-item" align="center">
+        <input type="checkbox" name="telnet_honeypot" lay-skin="switch" {% if telnet_honeypot_is_running %}
+            checked="" {% endif %} lay-text="Turn the Telnet honeypot off|Turn the Telnet honeypot on">
+    </div>
+    <div class="layui-form-item" align="center">
+        <input type="checkbox" name="ssh_honeypot" lay-skin="switch" {% if ssh_honeypot_is_running %}
+            checked="" {% endif %} lay-text="Turn the SSH honeypot off|Turn the SSH honeypot on">
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-btn-container" align="center">
+            <button type="submit" class="layui-btn layui-btn-normal" lay-submit="" lay-filter="demo1" name="set_honeypot_state"
+                value="True">Set honeypot state</button>
+        </div>
+    </div>
+    {% if count > 0 %}
+    <br>
+    <div class="layui-form-item">
+        <div class="layui-btn-container" align="center">
+            <button type="submit" class="layui-btn layui-btn-danger" lay-submit="" lay-filter="demo1" name="empty_temporary_files"
+                value="True">Empty temporary files</button>
+        </div>
+    </div>
+    {% endif %}
+</form>
+<br>
+<div align="center" id="anchor">
+    <blockquote class="layui-elem-quote layui-text" style="width:60%">
+        {% if result == "" %}
+        Note that the port range is 0-65535.
+        {% else %}
+        {{ result }}
+        {% endif %}
+    </blockquote>
+</div>
+{% endblock %}

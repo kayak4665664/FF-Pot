@@ -1,0 +1,453 @@
+{% extends "home_with_charts.html" %}
+
+{% block body %}
+<form class="layui-form" action="/home/" lay-filter="example" method="get">
+    <div class="layui-form-item" align="center">
+        <div class="layui-inline">
+            <div class="layui-inline" id="date_picker">
+                {% if start_date != "" and start_date is not None and end_date != "" and end_date is not None %}
+                <div class="layui-input-inline">
+                    <input type="text" name="start_date" id="start_date" class="layui-input" placeholder="From"
+                        value="{{ start_date }}" autocomplete="on">
+                </div>
+                <div class="layui-form-mid">-></div>
+                <div class="layui-input-inline">
+                    <input type="text" name="end_date" id="end_date" class="layui-input" placeholder="To"
+                        value="{{ end_date }}" autocomplete="on">
+                </div>
+                {% else %}
+                <div class="layui-input-inline">
+                    <input type="text" name="start_date" id="start_date" class="layui-input" placeholder="From"
+                        autocomplete="off">
+                </div>
+                <div class="layui-form-mid">-></div>
+                <div class="layui-input-inline">
+                    <input type="text" name="end_date" id="end_date" class="layui-input" placeholder="To"
+                        autocomplete="off">
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-btn-container" align="center">
+            <button type="submit" class="layui-btn" lay-submit="" lay-filter="demo1" name="filter_connections_charts"
+                value="True">Filter</button>
+        </div>
+    </div>
+</form>
+{% if filtered == True %}
+<br>
+<figure class="connections_line_chart">
+    <div id="connections_line_chart"></div>
+</figure>
+<style>
+    .connections_line_chart,
+    .highcharts-data-table table {
+        min-width: 360px;
+        max-width: 90%;
+        margin: 1em auto;
+    }
+
+    .highcharts-data-table table {
+        font-family: Verdana, sans-serif;
+        border-collapse: collapse;
+        border: 1px solid #ebebeb;
+        margin: 10px auto;
+        text-align: center;
+        width: 100%;
+        max-width: 500px;
+    }
+
+    .highcharts-data-table caption {
+        padding: 1em 0;
+        font-size: 1.2em;
+        color: #555;
+    }
+
+    .highcharts-data-table th {
+        font-weight: 600;
+        padding: 0.5em;
+    }
+
+    .highcharts-data-table td,
+    .highcharts-data-table th,
+    .highcharts-data-table caption {
+        padding: 0.5em;
+    }
+
+    .highcharts-data-table thead tr,
+    .highcharts-data-table tr:nth-child(even) {
+        background: #f8f8f8;
+    }
+
+    .highcharts-data-table tr:hover {
+        background: #f1f7ff;
+    }
+</style>
+<script>
+    Highcharts.chart('connections_line_chart', {
+        credits: {
+            enabled: false
+        },
+        title: {
+            text: "{{ connections_line_chart_title }}"
+        },
+        yAxis: {
+            title: {
+                text: 'Number of Actions'
+            }
+        },
+
+        xAxis: {
+            accessibility: {
+                rangeDescription: 'Range: date'
+            },
+            type: "category",
+        },
+
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'middle'
+        },
+
+        plotOptions: {
+            series: {
+                label: {
+                    connectorAllowed: false
+                },
+                pointStart: {{ connections_line_chart_point_start }}
+            }
+        },
+
+        series: [{
+            name: 'Sum',
+            data: [
+                {% for number in sum %}
+                {{ number }},
+                {% endfor %}
+            ]
+        }, {
+            name: 'Telnet',
+            data: [
+                {% for number in telnet %}
+                {{ number }},
+                {% endfor %}
+            ]
+        }, {
+            name: 'SSH',
+            data: [
+                {% for number in ssh %}
+                {{ number }},
+                {% endfor %}
+            ]
+        }],
+
+        responsive: {
+            rules: [{
+                condition: {
+                    maxWidth: 500
+                },
+                chartOptions: {
+                    legend: {
+                        layout: 'horizontal',
+                        align: 'center',
+                        verticalAlign: 'bottom'
+                    }
+                }
+            }]
+        }
+
+    });
+</script>
+<br>
+<figure class="connections_pie_chart">
+    <div id="connections_pie_chart""></div>
+</figure>
+<style>
+    .connections_pie_chart,
+    .highcharts-data-table table {
+        min-width: 320px;
+        max-width: 90%;
+        margin: 1em auto;
+    }
+
+    .highcharts-data-table table {
+        font-family: Verdana, sans-serif;
+        border-collapse: collapse;
+        border: 1px solid #ebebeb;
+        margin: 10px auto;
+        text-align: center;
+        width: 100%;
+        max-width: 500px;
+    }
+
+    .highcharts-data-table caption {
+        padding: 1em 0;
+        font-size: 1.2em;
+        color: #555;
+    }
+
+    .highcharts-data-table th {
+        font-weight: 600;
+        padding: 0.5em;
+    }
+
+    .highcharts-data-table td,
+    .highcharts-data-table th,
+    .highcharts-data-table caption {
+        padding: 0.5em;
+    }
+
+    .highcharts-data-table thead tr,
+    .highcharts-data-table tr:nth-child(even) {
+        background: #f8f8f8;
+    }
+
+    .highcharts-data-table tr:hover {
+        background: #f1f7ff;
+    }
+</style>
+<script>
+    Highcharts.chart('connections_pie_chart', {
+        credits: {
+            enabled: false
+        },
+        chart: {
+            type: 'pie'
+        },
+        title: {
+            text: "{{ connections_pie_chart_title }}"
+        },
+
+        accessibility: {
+            announceNewData: {
+                enabled: true
+            },
+            point: {
+                valueSuffix: '%'
+            }
+        },
+
+        plotOptions: {
+            series: {
+                dataLabels: {
+                    enabled: true,
+                    format: '{point.name}: {point.y:.1f}%'
+                }
+            }
+        },
+
+        tooltip: {
+            headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+            pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}%</b> of total<br/>'
+        },
+
+        series: [
+            {
+                name: "Connection",
+                colorByPoint: true,
+                data: [
+                    {% for connection in connections_pie_chart %}
+                    { name: "{{ connection.name }}", y: {{ connection.y }} },
+                    {% endfor %}
+                ]
+            }
+        ],
+    });
+</script>
+<br>
+<figure class="regions_pie_chart">
+    <div id="regions_pie_chart""></div>
+</figure>
+<style>
+    .regions_pie_chart,
+    .highcharts-data-table table {
+        min-width: 320px;
+        max-width: 90%;
+        margin: 1em auto;
+    }
+
+    .highcharts-data-table table {
+        font-family: Verdana, sans-serif;
+        border-collapse: collapse;
+        border: 1px solid #ebebeb;
+        margin: 10px auto;
+        text-align: center;
+        width: 100%;
+        max-width: 500px;
+    }
+
+    .highcharts-data-table caption {
+        padding: 1em 0;
+        font-size: 1.2em;
+        color: #555;
+    }
+
+    .highcharts-data-table th {
+        font-weight: 600;
+        padding: 0.5em;
+    }
+
+    .highcharts-data-table td,
+    .highcharts-data-table th,
+    .highcharts-data-table caption {
+        padding: 0.5em;
+    }
+
+    .highcharts-data-table thead tr,
+    .highcharts-data-table tr:nth-child(even) {
+        background: #f8f8f8;
+    }
+
+    .highcharts-data-table tr:hover {
+        background: #f1f7ff;
+    }
+</style>
+<script>
+    Highcharts.chart('regions_pie_chart', {
+        credits: {
+            enabled: false
+        },
+        chart: {
+            type: 'pie'
+        },
+        title: {
+            text: "{{ regions_pie_chart_title }}"
+        },
+
+        accessibility: {
+            announceNewData: {
+                enabled: true
+            },
+            point: {
+                valueSuffix: '%'
+            }
+        },
+
+        plotOptions: {
+            series: {
+                dataLabels: {
+                    enabled: true,
+                    format: '{point.name}: {point.y:.1f}%'
+                }
+            }
+        },
+
+        tooltip: {
+            headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+            pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}%</b> of total<br/>'
+        },
+
+        series: [
+            {
+                name: "Region",
+                colorByPoint: true,
+                data: [
+                    {% for connection_region in connection_regions_pie_chart %}
+                    { name: "{{ connection_region.name }}", y: {{ connection_region.y }} },
+                    {% endfor %}
+                ]
+            }
+        ],
+    });
+</script>
+<br>
+<figure class="commands_pie_chart">
+    <div id="commands_pie_chart"></div>
+</figure>
+<style>
+    .commands_pie_chart,
+    .highcharts-data-table table {
+        min-width: 320px;
+        max-width: 90%;
+        margin: 1em auto;
+    }
+
+    .highcharts-data-table table {
+        font-family: Verdana, sans-serif;
+        border-collapse: collapse;
+        border: 1px solid #ebebeb;
+        margin: 10px auto;
+        text-align: center;
+        width: 100%;
+        max-width: 500px;
+    }
+
+    .highcharts-data-table caption {
+        padding: 1em 0;
+        font-size: 1.2em;
+        color: #555;
+    }
+
+    .highcharts-data-table th {
+        font-weight: 600;
+        padding: 0.5em;
+    }
+
+    .highcharts-data-table td,
+    .highcharts-data-table th,
+    .highcharts-data-table caption {
+        padding: 0.5em;
+    }
+
+    .highcharts-data-table thead tr,
+    .highcharts-data-table tr:nth-child(even) {
+        background: #f8f8f8;
+    }
+
+    .highcharts-data-table tr:hover {
+        background: #f1f7ff;
+    }
+</style>
+<script>
+    Highcharts.chart('commands_pie_chart', {
+        credits: {
+            enabled: false
+        },
+        chart: {
+            type: 'pie'
+        },
+        title: {
+            text: "{{ commands_pie_chart_title }}"
+        },
+
+        accessibility: {
+            announceNewData: {
+                enabled: true
+            },
+            point: {
+                valueSuffix: '%'
+            }
+        },
+
+        plotOptions: {
+            series: {
+                dataLabels: {
+                    enabled: true,
+                    format: '{point.name}: {point.y:.1f}%'
+                }
+            }
+        },
+
+        tooltip: {
+            headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+            pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}%</b> of total<br/>'
+        },
+
+        series: [
+            {
+                name: "Command",
+                colorByPoint: true,
+                data: [
+                    {% for connection_command in connection_commands_pie_chart %}
+                    { name: "{{ connection_command.name }}", y: {{ connection_command.y }} },
+                    {% endfor %}
+                ]
+            }
+        ],
+    });
+</script>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends "home.html" %}
+
+{% block scripts %}
+<script type="text/javascript" src="/statics/jquery-3.6.0.min.js"></script>
+<script>
+    function getFile() {
+        $("#getF").click();
+    }
+    var filename = "";
+    function clickF() {
+        filename = $("#getF").val();
+        var filenames = filename.split("\\");
+        filename = filenames[filenames.length - 1];
+        $("#lb").text(filename);
+    }
+</script>
+{% endblock %}

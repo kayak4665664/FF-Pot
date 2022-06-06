@@ -1,0 +1,36 @@
+{% extends "home_with_upload_file.html" %}
+
+{% block body %}
+{% if count > 0 %}
+<script>
+    layui.use('code', function () {
+        layui.code({
+            height: '450px'
+        });
+    });
+</script>
+<div align="center">
+    <pre class="layui-code" style="width:90%" align="left">
+// Write the hidden paths line by line to a text file. Select the file first, then click set button.{% for hidden_path in hidden_paths %}
+{{ hidden_path }}
+{% endfor %}</pre>
+</div>
+{% else %}
+<div align="center">
+    <blockquote class="layui-elem-quote layui-text" style="width:60%">
+        No hidden path. Write the hidden paths line by line to a text file. Select the file first, then click set
+        button.
+    </blockquote>
+</div>
+{% endif %}
+<br>
+<form enctype="multipart/form-data" class="layui-form" action="/home/" lay-filter="example" method="POST">
+    <div class="layui-upload" align="center">
+        <input type="button" value="Select file" class="layui-btn layui-btn-normal" onclick="getFile()">
+        <input style="display: none" type="file" name="hidden_paths_file" accept="text/plain" id="getF"
+            onchange="clickF()">
+        <button type="submit" class="layui-btn" id="test9" name="set_hidden_paths" value="True">Set hidden
+            paths</button>
+    </div>
+</form>
+{% endblock %}

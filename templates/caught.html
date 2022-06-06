@@ -1,0 +1,52 @@
+{% extends "home.html" %}
+
+{% block body %}
+{% if result != "" %}
+<div align="center">
+    <blockquote class="layui-elem-quote layui-text" style="width:60%">
+        {{ result }}
+    </blockquote>
+</div>
+<br>
+{% endif %}
+<form class="layui-form" action="/home/" lay-filter="example" method="get">
+    <div class="layui-form-item">
+        <div class="layui-btn-container" align="center">
+            <button type="submit" class="layui-btn layui-btn-danger" lay-submit="" lay-filter="demo1"
+                name="empty_caught_files" value="True">Empty caught files</button>
+        </div>
+    </div>
+    <br>
+    {% if count > 0 %}
+    <table class="layui-table" style="width:90%; margin-left:auto; margin-right:auto;">
+        <colgroup>
+            <col>
+            <col width="400">
+        </colgroup>
+        <thead>
+            <tr>
+                <th>Path</th>
+                <th>Download</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for caught in caughts %}
+            <tr>
+                <td>{{ caught }}</td>
+                <td>
+                    <button type="submit" class="layui-btn layui-btn-normal" lay-submit="" lay-filter="demo1"
+                        name="download_caught" value="{{ caught }}">Download</button>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <div align="center">
+        <blockquote class="layui-elem-quote layui-text" style="width:60%">
+            No caught file.
+        </blockquote>
+    </div>
+{% endif %}
+</form>
+{% endblock %}

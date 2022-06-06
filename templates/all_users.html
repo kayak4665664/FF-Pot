@@ -1,0 +1,39 @@
+{% extends "home.html" %}
+
+{% block body %}
+{% if count > 0 %}
+<table align="center" class="layui-table" lay-even="" lay-skin="nob"
+    style="width:90%; margin-left:auto; margin-right:auto;">
+    <colgroup>
+        <col>
+        <col>
+        <col>
+        <col>
+    </colgroup>
+    <thead>
+        <tr>
+            <th>User ID</th>
+            <th>User Type</th>
+            <th>Phone</th>
+            <th>Mail</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for user in all_users %}
+        <tr>
+            <td>{{ user.user_id }}</td>
+            <td>{{ user.user_type }}</td>
+            <td>{{ user.phone_number }}</td>
+            <td>{{ user.mail_address }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<div align="center">
+    <blockquote class="layui-elem-quote layui-text" style="width:60%">
+        No user.
+    </blockquote>
+</div>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,89 @@
+{% extends "home.html" %}
+
+{% block body %}
+<table class="layui-table" style="width:90%; margin-left:auto; margin-right:auto;">
+    <colgroup>
+        <col width="200">
+        <col width="200">
+        <col width="200">
+        <col>
+    </colgroup>
+    <thead>
+        <tr>
+            <th>User ID</th>
+            <th>User Type</th>
+            <th>Phone</th>
+            <th>Mail</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>{{ user.user_id }}</td>
+            <td>{{ user.user_type }}</td>
+            <td>{{ user.phone_number }}</td>
+            <td>{{ user.mail_address }}</td>
+        </tr>
+    </tbody>
+</table>
+<br>
+<form class="layui-form" action="/home/" lay-filter="example" method="get">
+    <div class="layui-form-item" align="center">
+        <div>
+            <input type="password" name="user_password" placeholder="Password" autocomplete="off" class="layui-input"
+                style="width:50%">
+        </div>
+    </div>
+    <div class="layui-form-item" align="center">
+        <div>
+            <input type="password" name="repeat_password" placeholder="Repeat" autocomplete="off" class="layui-input"
+                style="width:50%">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-btn-container" align="center">
+            <button type="submit" class="layui-btn" lay-submit="" lay-filter="demo1" name="change_password"
+                value="True">Change
+                password</button>
+        </div>
+    </div>
+    <br>
+    <div class="layui-form-item" align="center">
+        <div>
+            <input type="text" name="phone_number" lay-verify="title" autocomplete="off"
+                placeholder="Phone number, e.g. +861234567890" class="layui-input" style="width:50%">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-btn-container" align="center">
+            <button type="submit" class="layui-btn" lay-submit="" lay-filter="demo1" name="set_phone_number"
+                value="True">Set
+                phone number</button>
+        </div>
+    </div>
+    <br>
+    <div class="layui-form-item" align="center">
+        <div>
+            <input type="text" name="mail_address" lay-verify="title" autocomplete="off" placeholder="Mail address"
+                class="layui-input" style="width:50%">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-btn-container" align="center">
+            <button type="submit" class="layui-btn" lay-submit="" lay-filter="demo1" name="set_mail_address"
+                value="True">Set
+                mail address</button>
+        </div>
+    </div>
+</form>
+<br>
+<div align="center" id="anchor">
+    <blockquote class="layui-elem-quote layui-text" style="width:60%">
+        {% if result == "" %}
+        If you want to remove the phone number or email address, leave the input box blank and click the button
+        directly.
+        {% else %}
+        {{ result }}
+        {% endif %}
+    </blockquote>
+</div>
+{% endblock %}

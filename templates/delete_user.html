@@ -1,0 +1,29 @@
+{% extends "home.html" %}
+
+{% block body %}
+<form class="layui-form" action="/home/" lay-filter="example" method="get">
+    <div class="layui-form-item" align="center">
+        <div>
+            <input type="text" name="user_id_to_delete" lay-verify="title" autocomplete="off" placeholder="User ID"
+                class="layui-input" style="width:50%">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-btn-container" align="center">
+            <button type="submit" class="layui-btn" lay-submit="" lay-filter="demo1" name="delete_user"
+                value="True">Delete
+                user</button>
+        </div>
+    </div>
+</form>
+<br>
+<div align="center">
+    <blockquote class="layui-elem-quote layui-text" style="width:60%">
+        {% if result == "" %}
+        Delete visitor type user.
+        {% else %}
+        {{ result }}
+        {% endif %}
+    </blockquote>
+</div>
+{% endblock %}

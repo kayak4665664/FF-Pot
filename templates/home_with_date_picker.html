@@ -1,0 +1,15 @@
+{% extends "home.html" %}
+
+{% block scripts %}
+<script>
+    layui.use('laydate', function () {
+        var laydate = layui.laydate;
+        laydate.render({
+            elem: '#date_picker'
+            , lang: 'en'
+            , range: ['#start_date', '#end_date']
+            , format: 'yyyy/MM/dd'
+        });
+    });
+</script>
+{% endblock %}

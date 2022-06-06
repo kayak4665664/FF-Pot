@@ -1,0 +1,22 @@
+{% extends "home.html" %}
+
+{% block scripts %}
+<script>
+    layui.use('laydate', function () {
+        var laydate = layui.laydate;
+        laydate.render({
+            elem: '#date_picker'
+            , lang: 'en'
+            , range: ['#start_date', '#end_date']
+            , format: 'yyyy/MM/dd'
+        });
+    });
+</script>
+<script src="/statics/Highcharts/code/highcharts.js"></script>
+<script src="/statics/Highcharts/code/modules/series-label.js"></script>
+<script src="/statics/Highcharts/code/modules/exporting.js"></script>
+<script src="/statics/Highcharts/code/modules/export-data.js"></script>
+<script src="/statics/Highcharts/code/modules/accessibility.js"></script>
+<script src="/statics/Highcharts/code/modules/data.js"></script>
+<script src="/statics/Highcharts/code/modules/drilldown.js"></script>
+{% endblock %}

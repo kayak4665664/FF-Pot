@@ -1,0 +1,87 @@
+{% extends "home.html" %}
+
+{% block body %}
+<table class="layui-table" style="width:90%; margin-left:auto; margin-right:auto;">
+    <colgroup>
+        <col width="200">
+        <col width="200">
+        <col>
+    </colgroup>
+    <thead>
+        <tr>
+            <th>SMS Alert</th>
+            <th>SMS Number</th>
+            <th>SID</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>{{ send_sms }}</td>
+            <td>{{ sms_number }}</td>
+            <td>{{ sms_sid }}</td>
+        </tr>
+    </tbody>
+</table>
+<br>
+<form class="layui-form" action="/home/" lay-filter="example" method="get">
+    <div class="layui-form-item" align="center">
+        <div>
+            <input type="text" name="sms_number" lay-verify="title" autocomplete="off"
+                placeholder="SMS number" class="layui-input" style="width:50%">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-btn-container" align="center">
+            <button type="submit" class="layui-btn" lay-submit="" lay-filter="demo1" name="set_sms_number"
+                value="True">Set SMS number</button>
+        </div>
+    </div>
+    <br>
+    <div class="layui-form-item" align="center">
+        <div>
+            <input type="text" name="sms_sid" lay-verify="title" autocomplete="off"
+                placeholder="SMS SID" class="layui-input" style="width:50%">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-btn-container" align="center">
+            <button type="submit" class="layui-btn" lay-submit="" lay-filter="demo1" name="set_sms_sid"
+                value="True">Set SMS SID</button>
+        </div>
+    </div>
+    <br>
+    <div class="layui-form-item" align="center">
+        <div>
+            <input type="password" name="sms_token" placeholder="SMS token" autocomplete="off"
+                class="layui-input" style="width:50%">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-btn-container" align="center">
+            <button type="submit" class="layui-btn" lay-submit="" lay-filter="demo1" name="set_sms_token"
+                value="True">Set SMS token</button>
+        </div>
+    </div>
+    <br>
+    <div class="layui-form-item" align="center">
+        <input type="checkbox" name="sms_alert" lay-skin="switch" {% if send_sms == True %}
+            checked="" {% endif %} lay-text="Turn SMS alert off|Turn SMS aleret on">
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-btn-container" align="center">
+            <button type="submit" class="layui-btn layui-btn-normal" lay-submit="" lay-filter="demo1" name="set_sms_alert_state"
+                value="True">Set SMS alert state</button>
+        </div>
+    </div>
+</form>
+<br>
+<div align="center" id="anchor">
+    <blockquote class="layui-elem-quote layui-text" style="width:60%">
+        {% if result == "" %}
+        The default SMS service is powered by twilio.
+        {% else %}
+        {{ result }}
+        {% endif %}
+    </blockquote>
+</div>
+{% endblock %}
