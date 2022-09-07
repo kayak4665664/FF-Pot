@@ -1,4 +1,4 @@
-# NCUT-Pot
+# FF-Pot
 
 This honeypot supports Telnet and SSH two protocols, simulates the Linux system, and stores the data in the SQL database. In addition, it also sends alerts to users via SMS and email. Users can customize commands and directories.
 这个蜜罐支持Telnet和SSH两种协议，模拟Linux系统，将攻击数据存储在SQL数据库中。此外，它还通过短信和电子邮件向用户发送警报。用户可以自定义蜜罐的命令和目录。
@@ -10,7 +10,7 @@ This honeypot supports Telnet and SSH two protocols, simulates the Linux system,
 ## Tree
 ```
 ├── LICENSE
-├── NCUT_Pot
+├── FF_Pot
 │   ├── __init__.py
 │   ├── asgi.py
 │   ├── database.py
@@ -35,7 +35,7 @@ This honeypot supports Telnet and SSH two protocols, simulates the Linux system,
 │   ├── urls.py
 │   ├── views.py
 │   └── wsgi.py
-├── NCUT_Pot_Model
+├── FF_Pot_Model
 │   ├── __init__.py
 │   ├── admin.py
 │   ├── apps.py

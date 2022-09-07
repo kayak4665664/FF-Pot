@@ -1,7 +1,7 @@
 import os
 import time
 from django.http import FileResponse
-from NCUT_Pot_Model.models import (
+from FF_Pot_Model.models import (
     Configs,
     Users,
 )

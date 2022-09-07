@@ -19,7 +19,7 @@ from .fake_files import (
     check_permission,
     separate_urls_and_params,
 )
-from NCUT_Pot.database import (
+from FF_Pot.database import (
     get_usernames,
     get_passwords,
     start_adding_connections,

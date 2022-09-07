@@ -1,5 +1,5 @@
 import subprocess
-from NCUT_Pot.database import get_config_value, start_adding_honeypots_log
+from FF_Pot.database import get_config_value, start_adding_honeypots_log
 
 
 def send_sms(numbers, params):

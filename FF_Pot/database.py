@@ -8,7 +8,7 @@ import urllib.request
 import ipaddress
 import time
 import threading
-from NCUT_Pot_Model.models import (
+from FF_Pot_Model.models import (
     Configs,
     Users,
     Hidden_paths,

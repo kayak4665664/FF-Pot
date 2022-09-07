@@ -2,7 +2,7 @@ import gevent, gevent.server
 from .telnet_honeypot import TelnetHoneypot
 from .ssh_honeypot import SSHHoneypot
 from .state_of_honeypots import set_state
-from NCUT_Pot.database import get_config_value, start_adding_honeypots_log
+from FF_Pot.database import get_config_value, start_adding_honeypots_log
 import threading
 
 

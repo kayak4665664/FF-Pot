@@ -1,7 +1,7 @@
 from .ssh_handler import SSHHandler, getRsaKeyFile
 from .telnet_honeypot import TelnetHoneypot
 import random
-from NCUT_Pot.database import get_usernames, get_passwords
+from FF_Pot.database import get_usernames, get_passwords
 
 
 class SSHHoneypot(SSHHandler):

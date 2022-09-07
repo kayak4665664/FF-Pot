@@ -10,7 +10,7 @@ from paramiko import (
     OPEN_SUCCEEDED,
     OPEN_FAILED_ADMINISTRATIVELY_PROHIBITED,
 )
-from NCUT_Pot.database import start_adding_honeypots_log
+from FF_Pot.database import start_adding_honeypots_log
 
 
 def getRsaKeyFile(filename, password=None):

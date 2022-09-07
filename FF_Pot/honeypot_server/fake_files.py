@@ -3,7 +3,7 @@ from pathlib import Path
 import subprocess
 import zipfile
 from django.core.validators import URLValidator
-from NCUT_Pot.database import (
+from FF_Pot.database import (
     get_hidden_paths,
     get_caught_paths,
     start_adding_path_to_caught,

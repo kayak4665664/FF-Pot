@@ -1,7 +1,7 @@
 import smtplib
 from email.mime.text import MIMEText
 from email.header import Header
-from NCUT_Pot.database import get_config_value, start_adding_honeypots_log
+from FF_Pot.database import get_config_value, start_adding_honeypots_log
 
 
 def send_mail(mails, params):
@@ -16,7 +16,7 @@ def send_mail(mails, params):
         "plain",
         "utf-8",
     )
-    subject = "NCUT-Pot"
+    subject = "FF-Pot"
     message["Subject"] = Header(subject, "utf-8")
     try:
         smtp = smtplib.SMTP_SSL(mail_host, get_config_value("ssl_port"))

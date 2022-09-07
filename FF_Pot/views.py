@@ -3,7 +3,7 @@ import re
 import time
 from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import render
-from NCUT_Pot_Model.models import Users
+from FF_Pot_Model.models import Users
 from .database import (
     get_caught_paths,
     get_config_value,

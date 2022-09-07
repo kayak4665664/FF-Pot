@@ -1,5 +1,5 @@
 """
-ASGI config for NCUT_Pot project.
+ASGI config for FF_Pot project.
 
 It exposes the ASGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.asgi import get_asgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'NCUT_Pot.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'FF_Pot.settings')
 
 application = get_asgi_application()

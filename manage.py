@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 from gevent import monkey
 monkey.patch_all()
-from NCUT_Pot.honeypot_server.state_of_honeypots import init_state_of_honeypots
+from FF_Pot.honeypot_server.state_of_honeypots import init_state_of_honeypots
 
 """Django's command-line utility for administrative tasks."""
 import os
@@ -10,7 +10,7 @@ import sys
 
 def main():
     """Run administrative tasks."""
-    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'NCUT_Pot.settings')
+    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'FF_Pot.settings')
     try:
         from django.core.management import execute_from_command_line
     except ImportError as exc:

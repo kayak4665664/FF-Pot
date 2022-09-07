@@ -1,5 +1,5 @@
 """
-WSGI config for NCUT_Pot project.
+WSGI config for FF_Pot project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'NCUT_Pot.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'FF_Pot.settings')
 
 application = get_wsgi_application()

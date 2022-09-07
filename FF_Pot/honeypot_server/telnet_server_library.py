@@ -16,7 +16,7 @@ from .fake_files import (
     dir_exists,
     tab_completion,
 )
-from NCUT_Pot.database import (
+from FF_Pot.database import (
     get_not_allowed_commands,
     get_config_value,
     start_adding_honeypots_log,

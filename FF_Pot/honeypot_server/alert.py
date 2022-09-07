@@ -2,7 +2,7 @@ from .send_mail import send_mail
 from .send_sms import send_sms
 import time
 import threading
-from NCUT_Pot.database import get_config_value, get_phone_numbers, get_mail_addresses
+from FF_Pot.database import get_config_value, get_phone_numbers, get_mail_addresses
 
 
 def alert(ip, honeypot_type):

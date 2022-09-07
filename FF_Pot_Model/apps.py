@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class NcutPotModelConfig(AppConfig):
+class FFPotModelConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'NCUT_Pot_Model'
+    name = 'FF_Pot_Model'
