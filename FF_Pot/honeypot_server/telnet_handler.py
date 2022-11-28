@@ -38,7 +38,7 @@ class TelnetHandler(TelnetHandlerBase):
 
     def inputcooker_socket_ready(self):
         """Indicate that the socket is ready to be read."""
-        return gevent.select.select([self.sock.fileno()], [], []ˇˇ, 0) != ([], [], [])
+        return gevent.select.select([self.sock.fileno()], [], [], 0) != ([], [], [])
 
     def inputcooker_store_queue(self, char):
         """Put the cooked data in the input queue (no locking needed)."""
