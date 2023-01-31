@@ -16,11 +16,19 @@ Including another URLconf
 from django.urls import path
 from . import views
 from django.conf.urls import handler400, handler403, handler404, handler500
+from django.contrib.staticfiles.views import serve
+from django.urls import re_path
+
+
+def return_statics(request, path, insecure=True, **kwargs):
+    return serve(request, path, insecure, **kwargs)
+
 
 urlpatterns = [
     path("login/", views.login),
     path("home/", views.home),
     path("", views.home),
+    re_path(r"^statics/(?P<path>.*)$", return_statics, name="statics"),
 ]
 
 handler400 = views.error
