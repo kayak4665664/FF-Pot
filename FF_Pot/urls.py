@@ -20,7 +20,6 @@ from django.conf.urls import handler400, handler403, handler404, handler500
 urlpatterns = [
     path("login/", views.login),
     path("home/", views.home),
-    path("/", views.home),
     path("", views.home),
 ]
 
